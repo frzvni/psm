@@ -10,7 +10,7 @@ export default function Home() {
     // Replace 'your_collection' with your actual collection name
     const fetchRecords = async () => {
       try {
-        const result = await pb.collection('your_collection').getList(1, 50);
+        const result = await pb.collection('patients').getList(1, 50);
         setRecords(result.items);
       } catch (error) {
         console.error('Error fetching records:', error);

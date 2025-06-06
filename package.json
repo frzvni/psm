@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pb": "./pocketbase serve --http=127.0.0.1:8090"
   },
   "dependencies": {
     "next": "15.3.3",
