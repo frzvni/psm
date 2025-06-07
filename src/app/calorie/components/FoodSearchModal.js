@@ -59,7 +59,7 @@ const FoodSearchModal = ({ isOpen, onClose, onFoodSelect, foodDatabase = {} }) =
 
   const handleFoodSelect = (food) => {
     if (!food || !food.name) return;
-    
+
     const newFood = {
       ...food,
       portion: 100,
@@ -68,7 +68,7 @@ const FoodSearchModal = ({ isOpen, onClose, onFoodSelect, foodDatabase = {} }) =
       carbs: food.carbs || 0,
       fat: food["total-fat"] || 0
     };
-    
+
     console.log('Sending food to parent:', newFood);
     onFoodSelect(newFood);
     onClose();
@@ -78,7 +78,7 @@ const FoodSearchModal = ({ isOpen, onClose, onFoodSelect, foodDatabase = {} }) =
     console.log('Portion change:', foodName, newPortion);
     if (!foodName) return;
     const portion = parseInt(newPortion) || 0;
-    
+
     setSelectedFoods(selectedFoods.map(food => {
       if (food.name !== foodName) return food;
       return { ...food, portion: Math.max(0, portion) };
@@ -93,12 +93,12 @@ const FoodSearchModal = ({ isOpen, onClose, onFoodSelect, foodDatabase = {} }) =
   const handleAddSelectedFoods = () => {
     console.log('Adding selected foods:', selectedFoods);
     if (!selectedFoods.length) return;
-    
+
     selectedFoods.forEach(food => {
       if (!food || !food.name) return;
       const normalizedFood = {
         ...food,
-        fat: food.fat || food["total-fat"] || 0,
+        fat: food["total-fat"] || 0,
         portion: food.portion || 100,
         calories: food.calories || 0,
         protein: food.protein || 0,
