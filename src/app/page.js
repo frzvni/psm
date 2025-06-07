@@ -15,10 +15,10 @@ export default function Home() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <a className="nav-link" href="#"><i className="fas fa-home me-1"></i> خانه</a>
+                <a className="nav-link" href="/"><i className="fas fa-home me-1"></i> خانه</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="calorie-counter.html"><i className="fas fa-calculator me-1"></i> کالری شمار</a>
+                <a className="nav-link" href="calorie"><i className="fas fa-calculator me-1"></i> کالری شمار</a>
               </li>
             </ul>
           </div>
