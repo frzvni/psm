@@ -23,74 +23,7 @@ import styles from './calorie.module.css';
 import Navbar from '../components/Navbar';
 import MedicalConditionsModal from './components/MedicalConditionsModal';
 import FoodSearchModal from './components/FoodSearchModal';
-
-// Food database
-const foodDatabase = {
-  "غلات و حبوبات": {
-    description: "منبع اصلی کربوهیدرات و فیبر",
-    recommended: "6-11 واحد در روز",
-    foods: [
-      { name: "برنج", calories: 360, unit: "100 گرم", protein: 7, carbs: 79, "total-fat": 0.6 },
-      { name: "نان گندم", calories: 250, unit: "100 گرم", protein: 9, carbs: 45, "total-fat": 3 },
-      { name: "ماکارونی پخته", calories: 150, unit: "یک لیوان", protein: 5, carbs: 30, "total-fat": 1 },
-      { name: "عدس خام", calories: 340, unit: "100 گرم", protein: 25, carbs: 60, "total-fat": 1 }
-    ]
-  },
-  "لبنیات": {
-    description: "منبع کلسیم و پروتئین",
-    recommended: "2-3 واحد در روز",
-    foods: [
-      { name: "شیر", calories: 110, unit: "یک لیوان", protein: 8, carbs: 12, "total-fat": 5 },
-      { name: "ماست", calories: 55, unit: "100 گرم", protein: 3.5, carbs: 4, "total-fat": 3 },
-      { name: "پنیر پاستوریزه", calories: 250, unit: "100 گرم", protein: 25, carbs: 1, "total-fat": 15 }
-    ]
-  },
-  "گوشت و پروتئین": {
-    description: "منبع اصلی پروتئین و آهن",
-    recommended: "2-3 واحد در روز",
-    foods: [
-      { name: "گوشت گوساله", calories: 200, unit: "100 گرم", protein: 26, carbs: 0, "total-fat": 12 },
-      { name: "گوشت مرغ", calories: 200, unit: "100 گرم", protein: 31, carbs: 0, "total-fat": 9 },
-      { name: "ماهی", calories: 100, unit: "100 گرم", protein: 20, carbs: 0, "total-fat": 2 }
-    ]
-  },
-  "میوه‌ها": {
-    description: "منبع ویتامین‌ها و فیبر",
-    recommended: "2-4 واحد در روز",
-    foods: [
-      { name: "سیب", calories: 55, unit: "100 گرم", protein: 0.3, carbs: 14, "total-fat": 0.2 },
-      { name: "پرتقال", calories: 40, unit: "100 گرم", protein: 0.9, carbs: 9, "total-fat": 0.1 },
-      { name: "موز", calories: 95, unit: "100 گرم", protein: 1.1, carbs: 23, "total-fat": 0.3 }
-    ]
-  },
-  "سبزیجات": {
-    description: "منبع ویتامین‌ها، مواد معدنی و فیبر",
-    recommended: "3-5 واحد در روز",
-    foods: [
-      { name: "هویج", calories: 40, unit: "100 گرم", protein: 0.9, carbs: 9, "total-fat": 0.2 },
-      { name: "خیار", calories: 15, unit: "100 گرم", protein: 0.7, carbs: 3.6, "total-fat": 0.1 },
-      { name: "گوجه فرنگی", calories: 15, unit: "100 گرم", protein: 0.9, carbs: 3.2, "total-fat": 0.2 }
-    ]
-  },
-  "چربی‌ها": {
-    description: "منبع چربی‌های سالم و پروتئین",
-    recommended: "1-2 واحد در روز",
-    foods: [
-      { name: "بادام", calories: 612, unit: "100 گرم", protein: 21, carbs: 22, "total-fat": 53 },
-      { name: "پسته", calories: 340, unit: "100 گرم", protein: 20, carbs: 28, "total-fat": 27 },
-      { name: "گردو", calories: 625, unit: "100 گرم", protein: 15, carbs: 14, "total-fat": 65 }
-    ]
-  },
-  "نوشیدنی‌ها": {
-    description: "منبع آب و مواد معدنی",
-    recommended: "6-8 لیوان در روز",
-    foods: [
-      { name: "آب", calories: 0, unit: "یک لیوان", protein: 0, carbs: 0, "total-fat": 0 },
-      { name: "چای", calories: 2, unit: "یک لیوان", protein: 0, carbs: 0, "total-fat": 0 },
-      { name: "قهوه", calories: 2, unit: "یک لیوان", protein: 0, carbs: 0, "total-fat": 0 }
-    ]
-  }
-};
+import foodDatabase from './foodDatabase';
 
 // Daily tips
 const dailyTips = [
@@ -221,7 +154,7 @@ export default function CaloriePage() {
     }[userInfo.activityLevel];
 
     const tdee = bmr * activityMultiplier;
-    
+
     // Adjust calorie goal based on user's goal
     let recommendedCalories;
     if (userInfo.goal === 'lose') {
@@ -231,7 +164,7 @@ export default function CaloriePage() {
     } else {
       recommendedCalories = tdee; // maintenance
     }
-    
+
     // Calculate macronutrient distribution (15% protein, 30% fat, 55% carbs)
     const proteinCalories = recommendedCalories * 0.15;
     const fatCalories = recommendedCalories * 0.30;
@@ -242,7 +175,7 @@ export default function CaloriePage() {
     const targetFat = Math.round(fatCalories / 9);
     const targetCarbs = Math.round(carbsCalories / 4);
     const targetFiber = 25; // Recommended minimum fiber intake in grams
-    
+
     // Calculate BMI
     const heightInMeters = userInfo.height / 100;
     const bmi = userInfo.weight / (heightInMeters * heightInMeters);
@@ -266,7 +199,7 @@ export default function CaloriePage() {
     const bmr = userInfo.gender === 'male' 
       ? 10 * userInfo.weight + 6.25 * userInfo.height - 5 * userInfo.age + 5
       : 10 * userInfo.weight + 6.25 * userInfo.height - 5 * userInfo.age - 161;
-    
+
     const activityMultiplier = {
       sedentary: 1.2,
       light: 1.375,
@@ -319,7 +252,7 @@ export default function CaloriePage() {
 
   const handleRemoveFood = (mealType, foodIndex) => {
     if (!mealType || typeof foodIndex !== 'number') return;
-    
+
     setMeals(prev => {
       if (!prev || !prev[mealType]) return prev;
       const updatedMeal = [...prev[mealType]];
@@ -381,7 +314,7 @@ export default function CaloriePage() {
 
   const handleSaveMeal = (mealType, foods) => {
     if (!mealType || !foods) return;
-    
+
     const foodsArray = Array.isArray(foods) ? foods : [foods];
     setMeals(prev => {
       const currentMeal = prev[mealType] || [];
@@ -715,7 +648,7 @@ export default function CaloriePage() {
           </div>
             <button type="submit" className={styles.btnPrimary}>ثبت اطلاعات</button>
         </form>
-          
+
           {calculationResults && (
             <div className={styles.results}>
               <h3>نتایج محاسبات</h3>
